@@ -10,7 +10,7 @@ export const DATA = {
     description:
         "Software Developer, Open-Source Enthusiast and a Trekker. I love building things and shaping ideas to life.",
     summary:
-        "Passionate Full Stack Developer with over 5 years of experience in crafting innovative web solutions. Proficient in both frontend and backend technologies, I specialize in delivering high-quality, scalable applications that meet client needs and exceed expectations. My journey in software development has equipped me with a diverse skill set, including expertise in Java, Golang, React, Node.js, and Cloud Technologies.\n\nWith a keen eye for detail and a dedication to continuous learning, I am committed to staying abreast of the latest technologies and best practices in the ever-evolving field of web development. I am passionate about leveraging my expertise to contribute to innovative projects that make a difference.\n\nLet's connect and explore opportunities to collaborate on exciting ventures!",
+        "Passionate Full Stack Developer with over 6 years of experience in crafting innovative web solutions. Proficient in both frontend and backend technologies, I specialize in delivering high-quality, scalable applications that meet client needs and exceed expectations. My journey in software development has equipped me with a diverse skill set, including expertise in Java, Golang, React, Node.js, and Cloud Technologies.\n\nWith a keen eye for detail and a dedication to continuous learning, I am committed to staying abreast of the latest technologies and best practices in the ever-evolving field of web development. I am passionate about leveraging my expertise to contribute to innovative projects that make a difference.\n\nLet's connect and explore opportunities to collaborate on exciting ventures!",
     avatarUrl: "/me.png",
     skills: [
         "Golang",
@@ -73,6 +73,19 @@ export const DATA = {
     },
     work: [
         {
+            company: "Freelance Software Engineer",
+            href: "",
+            badges: [],
+            location: "Remote",
+            title: "",
+            logoUrl: "",
+            start: "November 2024",
+            end: "Present",
+            description:
+                "Working as a software engineer to build a new product from scratch.\nBuilding a platform for the next generation of cloud platform management tool.",
+            tech: ["Golang", "Typescript", "ReactJS", "PostgreSQL", "System Design", "AWS", "GCP", "Azure"]
+        },
+        {
             company: "MiRus, LLC",
             href: "",
             badges: [],
@@ -80,9 +93,9 @@ export const DATA = {
             title: "Full Stack Developer",
             logoUrl: "",
             start: "March 2022",
-            end: "Present",
+            end: "October 2024",
             description:
-                "Working as a Full Stack Developer building complex web applications for medical image analysis and processing.",
+                "As a Full Stack Developer built complex web applications for medical image analysis and processing.",
             tech: ["Node.js", "Typescript", "VueJS", "Docker", "Medical Image Processing", "AWS", "Spring Boot", "PostgreSQL"]
         },
         {
@@ -124,16 +137,18 @@ export const DATA = {
     ],
     projects: [
         {
-            title: "trekYourWorld",
+            title: "trekyourworld",
             href: "https://github.com/neo7337/trekYourWorld",
             dates: "May 2024 - Present",
             active: true,
             description:
                 "trekYourWorld is an open source project made for the trekking/hiking community.",
             technologies: [
-                "Node.js",
-                "NestJS",
-                "React",
+                "Golang",
+                "ReactJS",
+                "tailwindcss",
+                "Typescript",
+                "Docker",
                 "MongoDB"
             ],
             links: [
