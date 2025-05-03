@@ -1,0 +1,204 @@
+---
+title: "Mastering SOLID Principles in Go: Writing Clean and Maintainable Code"
+publishedAt: "2025-05-02"
+summary: "A deep dive into SOLID principles in Go, focusing on practical applications and examples."
+---
+
+
+In software development, building maintainable, scalable, and robust code is the ultimate goal. The **SOLID principles**, coined by Robert C. Martin (Uncle Bob), provide a foundation for achieving this in object-oriented programming. But how do these principles apply to Go (Golang), a language known for its simplicity and pragmatism? Let’s explore how Go’s idiomatic style aligns with SOLID principles to produce clean, efficient software.
+
+---
+
+## **Single Responsibility Principle (SRP)**
+
+> **"A class should have only one reason to change."**
+
+In Go, SRP translates to designing functions, structs, and packages with a single responsibility. This ensures code is easier to understand, test, and maintain.
+
+### **Example**
+**Violating SRP:**
+```go
+func (us *UserService) RegisterUser(username, password string) error {
+  // Save user to database
+  // Send confirmation email
+  // Log registration event
+  return nil
+}
+```
+This function handles multiple responsibilities: saving a user, sending an email, and logging events. Changes in any of these areas would require modifying this function.
+
+**Following SRP:**
+```go
+type UserService struct {
+  db Database
+  email EmailService
+  logger Logger
+}
+
+func (us *UserService) RegisterUser(username, password string) error {
+  if err := us.db.SaveUser(username, password); err != nil {
+    return err
+  }
+  if err := us.email.SendConfirmation(username); err != nil {
+    return err
+  }
+  us.logger.Log("User registered: " + username)
+  return nil
+}
+```
+Here, each responsibility is delegated to a specific component, making the code modular and testable.
+
+---
+
+## **Open/Closed Principle (OCP)**
+
+> **"Software entities should be open for extension but closed for modification."**
+
+Go achieves OCP through interfaces and composition, allowing behavior to be extended without altering existing code.
+
+### **Example**
+**Violating OCP:**
+```go
+func (p *PaymentProcessor) ProcessPayment(method string) {
+  if method == "credit_card" {
+    fmt.Println("Processing credit card payment")
+  } else if method == "paypal" {
+    fmt.Println("Processing PayPal payment")
+  }
+}
+```
+Adding a new payment method requires modifying the `ProcessPayment` function, which violates OCP.
+
+**Following OCP:**
+```go
+type PaymentMethod interface {
+  Process()
+}
+
+type CreditCard struct {}
+func (cc CreditCard) Process() { fmt.Println("Processing credit card payment") }
+
+type PayPal struct {}
+func (pp PayPal) Process() { fmt.Println("Processing PayPal payment") }
+
+func (p PaymentProcessor) ProcessPayment(method PaymentMethod) {
+  method.Process()
+}
+```
+Now, adding a new payment method only requires implementing the `PaymentMethod` interface, leaving existing code untouched.
+
+---
+
+## **Liskov Substitution Principle (LSP)**
+
+> **"Subtypes must be substitutable for their base types."**
+
+In Go, LSP is achieved by designing interfaces that focus on behavior rather than structure.
+
+### **Example**
+**Violating LSP:**
+```go
+type Rectangle struct {
+  Width, Height float64
+}
+
+type Square struct {
+  Side float64
+}
+
+func SetDimensions(shape *Rectangle, width, height float64) {
+  shape.Width = width
+  shape.Height = height
+}
+```
+Passing a `Square` to this function would break its constraints, as a square must have equal width and height.
+
+**Following LSP:**
+```go
+type Shape interface {
+  Area() float64
+}
+
+type Rectangle struct {
+  Width, Height float64
+}
+func (r Rectangle) Area() float64 { return r.Width * r.Height }
+
+type Square struct {
+  Side float64
+}
+func (s Square) Area() float64 { return s.Side * s.Side }
+
+func PrintArea(shape Shape) {
+  fmt.Printf("Area: %.2f\n", shape.Area())
+}
+```
+Both `Rectangle` and `Square` can implement `Shape` without violating their constraints, ensuring substitutability.
+
+---
+
+## **Interface Segregation Principle (ISP)**
+
+> **"Clients should not be forced to depend on interfaces they do not use."**
+
+Go’s lightweight interfaces naturally align with ISP by encouraging small, focused interfaces.
+
+### **Example**
+**Violating ISP:**
+```go
+type Worker interface {
+  Work()
+  Eat()
+  Sleep()
+}
+```
+Robots implementing this interface would have unused methods like `Eat` and `Sleep`.
+
+**Following ISP:**
+```go
+type Worker interface { Work() }
+type Eater interface { Eat() }
+type Sleeper interface { Sleep() }
+```
+Each type implements only the interfaces it needs, avoiding unnecessary dependencies.
+
+---
+
+## **Dependency Inversion Principle (DIP)**
+
+> **"High-level modules should depend on abstractions, not on details."**
+
+Go’s interfaces make it easy to decouple high-level logic from low-level implementations.
+
+### **Example**
+**Violating DIP:**
+```go
+type NotificationService struct {
+  emailSender EmailSender
+}
+
+func (ns *NotificationService) NotifyUser(message string) {
+  ns.emailSender.SendEmail(message)
+}
+```
+Here, `NotificationService` is tightly coupled to `EmailSender`.
+
+**Following DIP:**
+```go
+type Notifier interface {
+  Notify(message string)
+}
+
+type NotificationService struct {
+  notifier Notifier
+}
+
+func (ns *NotificationService) NotifyUser(message string) {
+  ns.notifier.Notify(message)
+}
+```
+This allows swapping `EmailSender` with other implementations like `SMSSender` without modifying `NotificationService`.
+
+---
+
+By embracing SOLID principles, Go developers can write clean, maintainable, and scalable code. Start small, refactor often, and let Go’s simplicity guide you toward better software design.
