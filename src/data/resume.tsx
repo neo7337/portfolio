@@ -73,17 +73,17 @@ export const DATA = {
     },
     work: [
         {
-            company: "Freelance Software Engineer",
+            company: "Appmanch Pty Ltd.",
             href: "",
             badges: [],
             location: "Remote",
-            title: "",
+            title: "Senior Software Engineer",
             logoUrl: "",
             start: "November 2024",
             end: "Present",
             description:
-                "Working as a software engineer to build a new product from scratch.\nBuilding a platform for the next generation of cloud platform management tool.",
-            tech: ["Golang", "Typescript", "ReactJS", "PostgreSQL", "System Design", "AWS", "GCP", "Azure"]
+                "I developed a customer-facing, GenAI-powered mobile platform from the ground up with a mobile-first approach using Flutter, ensuring seamless cross-platform performance and an intuitive user experience. On the backend, I designed and built over 7 microservices in Golang, optimized for scalability and performance, with PostgreSQL as the primary database. To enhance system responsiveness and fault tolerance, I implemented an event-driven architecture using message queues. I also integrated the Stripe payment gateway to enable secure, in-app transactions and subscription handling. Throughout the project, I maintained clean code practices, implemented test coverage, and established CI/CD pipelines to ensure high code quality and rapid, reliable deployments.",
+            tech: ["Golang", "Typescript", "ReactJS", "PostgreSQL", "System Design", "AWS", "GCP", "Microservices", "Event-Driven Architecture", "Stripe Integration", "CI/CD", "Flutter", "Github Actions"]
         },
         {
             company: "MiRus, LLC",
