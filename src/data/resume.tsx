@@ -95,7 +95,7 @@ export const DATA = {
             start: "March 2022",
             end: "October 2024",
             description:
-                "As a Full Stack Developer built complex web applications for medical image analysis and processing.",
+                "I worked on the GALILEO™ Surgical Planning and RPM platforms, where I set up a fully automated AWS infrastructure using Terraform to ensure scalability and consistency. On the frontend, I developed responsive and intuitive user interfaces using Vue.js and TypeScript. I also built and maintained robust backend services with Node.js, TypeScript, and PostgreSQL, and later developed high-performance modules for the GALILEO™ RPM system using Java 17 and Spring Boot, resulting in a 50% improvement in performance.",
             tech: ["Node.js", "Typescript", "VueJS", "Docker", "Medical Image Processing", "AWS", "Spring Boot", "PostgreSQL"]
         },
         {
@@ -108,7 +108,7 @@ export const DATA = {
             start: "November 2019",
             end: "February 2022",
             description:
-                "As a Devops Engineer built multiple automation tools and worked on multiple Cloud Migrations from On-Prem to Cloud.",
+                "I engineered a serverless solution using AWS Lambda and Golang, which improved operational efficiency by 60% and cut infrastructure costs by 40% through a scalable, event-driven architecture. I also built a self-service CI/CD portal that automated 95% of deployment processes, simplifying workflows and boosting performance by 85%. As part of a major modernization effort, I led the migration from on-prem infrastructure to AWS Cloud, enhancing scalability and security while reducing downtime by 98%. Additionally, I deployed a Kubernetes architecture on Amazon EKS using Gloo Microgateway for secure and efficient traffic management, and implemented GitOps with ArgoCD to streamline CI/CD pipelines and ensure consistent, automated application delivery.",
             tech: ["Golang", "AWS Lambda", "Serverless Architecture", "Docker", "Kubernetes", "Helm", "GitOps", "AWS", "GKE", "Node.js", "CI/CD", "Spring Boot"]
         },
         {
@@ -121,7 +121,7 @@ export const DATA = {
             start: "July 2018",
             end: "October 2019",
             description:
-                "Worked on multiple Complex Third-Party banking integrations and maintaining automation tools.",
+                "As a key member of the core development team, I spearheaded complex third-party integrations that enhanced overall project functionality and stability. I also developed new features for an internal automation tool, reducing manual boilerplate code generation by 90% and improving developer efficiency. Additionally, I implemented end-to-end automation for custom Excel sheet generation, achieving 100% automation and eliminating the need for manual intervention.",
             tech: ["Java", "Javascript", "SQL", "Integrations"]
         }
     ],
