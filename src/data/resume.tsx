@@ -161,7 +161,17 @@ export const DATA = {
                 "tailwindcss",
                 "Typescript",
                 "Docker"
-            ]
+            ],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://goinitializer.com",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "",
+            video:
+                "",
         },
         {
             title: "trekyourworld",
