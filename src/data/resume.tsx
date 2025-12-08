@@ -73,6 +73,19 @@ export const DATA = {
     },
     work: [
         {
+            company: "Thoughtworks",
+            href: "",
+            badges: [],
+            location: "Bengaluru, India",
+            title: "Senior Consultant - Developer",
+            logoUrl: "",
+            start: "September 2025",
+            end: "Present",
+            description:
+                "",
+            tech: ["Java", "Python", "AWS", "Golang", "Generative AI", "AI Agents", "Langchain"]
+        },
+        {
             company: "Appmanch Pty Ltd.",
             href: "",
             badges: [],
@@ -80,7 +93,7 @@ export const DATA = {
             title: "Senior Software Engineer",
             logoUrl: "",
             start: "November 2024",
-            end: "Present",
+            end: "September 2025",
             description:
                 "I developed a customer-facing, GenAI-powered mobile platform from the ground up with a mobile-first approach using Flutter, ensuring seamless cross-platform performance and an intuitive user experience. On the backend, I designed and built over 7 microservices in Golang, optimized for scalability and performance, with PostgreSQL as the primary database. To enhance system responsiveness and fault tolerance, I implemented an event-driven architecture using message queues. I also integrated the Stripe payment gateway to enable secure, in-app transactions and subscription handling. Throughout the project, I maintained clean code practices, implemented test coverage, and established CI/CD pipelines to ensure high code quality and rapid, reliable deployments.",
             tech: ["Golang", "Typescript", "ReactJS", "PostgreSQL", "System Design", "AWS", "GCP", "Microservices", "Event-Driven Architecture", "Stripe Integration", "CI/CD", "Flutter", "Github Actions"]
@@ -136,6 +149,20 @@ export const DATA = {
         }
     ],
     projects: [
+        {
+            title: "Go-Initializer",
+            href: "https://github.com/neo7337/go-initializer",
+            dates: "Aug 2025 - Present",
+            active: true,
+            description: "Go Initializer is a modern web-based tool to quickly scaffold Go projects with your preferred project type, Go version, and framework/dependency. It features a beautiful React frontend and is designed for speed and ease of use.",
+            technologies: [
+                "Golang",
+                "ReactJS",
+                "tailwindcss",
+                "Typescript",
+                "Docker"
+            ]
+        },
         {
             title: "trekyourworld",
             href: "https://github.com/neo7337/trekYourWorld",
