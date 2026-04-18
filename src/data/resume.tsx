@@ -82,7 +82,7 @@ export const DATA = {
             start: "September 2025",
             end: "Present",
             description:
-                "",
+                "Utilizing Gen-AI technologies to build client solutions and accelerate migrations.",
             tech: ["Java", "Python", "AWS", "Golang", "Generative AI", "AI Agents", "Langchain"]
         },
         {
