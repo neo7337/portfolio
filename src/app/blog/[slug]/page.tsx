@@ -2,6 +2,7 @@ import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -61,9 +62,9 @@ export default async function Blog({
 
     return (
         <section id="blog">
-            <script
+            <Script
+                id="blog-schema"
                 type="application/ld+json"
-                suppressHydrationWarning
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
