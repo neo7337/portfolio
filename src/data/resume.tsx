@@ -8,9 +8,9 @@ export const DATA = {
     location: "Gurugram, India",
     locationLink: "https://www.google.com/maps/place/Gurugram,+Haryana",
     description:
-        "Software Developer, Open-Source Enthusiast and a Trekker. I love building things and shaping ideas to life.",
+        "Backend Engineer focused on distributed systems, Golang, and cloud-native infrastructure — building fast, scalable systems and open-source tools.",
     summary:
-        "Passionate Full Stack Developer with over 6 years of experience in crafting innovative web solutions. Proficient in both frontend and backend technologies, I specialize in delivering high-quality, scalable applications that meet client needs and exceed expectations. My journey in software development has equipped me with a diverse skill set, including expertise in Java, Golang, React, Node.js, and Cloud Technologies.\n\nWith a keen eye for detail and a dedication to continuous learning, I am committed to staying abreast of the latest technologies and best practices in the ever-evolving field of web development. I am passionate about leveraging my expertise to contribute to innovative projects that make a difference.\n\nLet's connect and explore opportunities to collaborate on exciting ventures!",
+        "- **6+ years** building production-grade backend systems in Golang, Java, and Node.js across distributed, cloud-native environments.\n- At **Thoughtworks**, leveraging Gen-AI and AI agents (Langchain) to accelerate client migrations and build intelligent solutions.\n- At **Macquarie**, engineered a serverless AWS Lambda + Golang solution that cut infrastructure costs **40%** and boosted operational efficiency **60%**; led on-prem → AWS migration with **98% reduction** in downtime.\n- At **MiRus**, delivered a **50% performance improvement** on a medical surgical platform by re-architecting critical modules in Spring Boot.\n- Open-source contributor: [Golly SDK](https://github.com/nandlabs/golly), [go-struct-validator](https://github.com/neo7337/go-struct-validator), [go-initializer](https://github.com/neo7337/go-initializer).",
     avatarUrl: "/me.png",
     skills: [
         "Golang",
@@ -36,8 +36,8 @@ export const DATA = {
         { href: "#projects", icon: CodeIcon, label: "Projects" },
     ],
     contact: {
-        email: "hello@example.com",
-        tel: "+123456789",
+        email: "labs.neo73@gmail.com",
+        tel: "+91-9999873501",
         social: {
             GitHub: {
                 name: "GitHub",
@@ -74,11 +74,11 @@ export const DATA = {
     work: [
         {
             company: "Thoughtworks",
-            href: "",
+            href: "https://www.thoughtworks.com",
             badges: [],
             location: "Bengaluru, India",
             title: "Senior Consultant - Developer",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/thoughtworks.com",
             start: "September 2025",
             end: "Present",
             description:
@@ -87,11 +87,11 @@ export const DATA = {
         },
         {
             company: "Appmanch Pty Ltd.",
-            href: "",
+            href: "https://www.appmanch.com",
             badges: [],
             location: "Remote",
             title: "Senior Software Engineer",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/appmanch.com",
             start: "November 2024",
             end: "September 2025",
             description:
@@ -100,11 +100,11 @@ export const DATA = {
         },
         {
             company: "MiRus, LLC",
-            href: "",
+            href: "https://www.miruslive.com",
             badges: [],
             location: "Remote",
             title: "Full Stack Developer",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/miruslive.com",
             start: "March 2022",
             end: "October 2024",
             description:
@@ -114,10 +114,10 @@ export const DATA = {
         {
             company: "Macquarie Global Services Pvt. Ltd.",
             badges: [],
-            href: "",
+            href: "https://www.macquarie.com",
             location: "Remote/Gurugram, India",
             title: "Senior Associate",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/macquarie.com",
             start: "November 2019",
             end: "February 2022",
             description:
@@ -126,11 +126,11 @@ export const DATA = {
         },
         {
             company: "Newgen Software Technologies",
-            href: "",
+            href: "https://www.newgensoft.com",
             badges: [],
             location: "Gurugram, India",
             title: "Software Engineer",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/newgensoft.com",
             start: "July 2018",
             end: "October 2019",
             description:
@@ -143,7 +143,7 @@ export const DATA = {
             school: "J.C. Bose University of Science and Technology,\nYMCA (Formerly YMCA UST)",
             href: "https://www.jcboseust.ac.in/",
             degree: "Bachelor's Technology in Information Technology (B. Tech.)",
-            logoUrl: "",
+            logoUrl: "https://logo.clearbit.com/jcboseust.ac.in",
             start: "2014",
             end: "2018",
         }
@@ -169,7 +169,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "",
+            image: "/projects/go-initializer.png",
             video:
                 "",
         },
@@ -195,7 +195,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "",
+            image: "/projects/trekyourworld.png",
             video:
                 "",
         },
@@ -241,6 +241,5 @@ export const DATA = {
             video:
                 "/projects/go-struct-validator.mp4",
         }
-    ],
-    hackathons: []
+    ]
 } as const;
