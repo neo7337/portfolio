@@ -11,6 +11,10 @@ import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import { downloadPDF } from "@/lib/utils";
 import { BlogsMarquee } from "@/components/blogs-marquee";
+import { ImpactCounterStrip } from "@/components/impact-counter";
+import { CurrentlyStrip } from "@/components/currently-strip";
+import { OSSHighlight } from "@/components/oss-highlight";
+import { FeaturedProjectCard } from "@/components/featured-project-card";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -48,6 +52,12 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+            <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <ImpactCounterStrip />
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
+                <CurrentlyStrip />
+            </BlurFade>
             <section id="about">
                 <BlurFade delay={BLUR_FADE_DELAY * 3}>
                     <h2 className="text-xl font-bold">
@@ -123,13 +133,61 @@ export default function Page() {
                     <BlurFade delay={BLUR_FADE_DELAY * 9}>
                         <h2 className="text-xl font-bold">Skills</h2>
                     </BlurFade>
-                    <div className="flex flex-wrap gap-1">
-                        {DATA.skills.map((skill, id) => (
-                            <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                                <Badge key={skill}>{skill}</Badge>
-                            </BlurFade>
-                        ))}
-                    </div>
+                    {DATA.categorizedSkills.map((category, catId) => (
+                        <BlurFade key={category.category} delay={BLUR_FADE_DELAY * 10 + catId * 0.05}>
+                            <div className="space-y-2">
+                                <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                                    {category.category}
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {category.items.map((skill) => (
+                                        <div key={skill.name} className="flex items-center gap-1">
+                                            <Badge variant="secondary" className="text-xs">
+                                                {skill.name}
+                                            </Badge>
+                                            <span className={
+                                                "text-[9px] font-medium px-1 py-0.5 rounded " + (
+                                                    skill.level === "Proficient"
+                                                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                                                        : skill.level === "Familiar"
+                                                        ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                                                        : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                )
+                                            }>
+                                                {skill.level}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </BlurFade>
+                    ))}
+                    <BlurFade delay={BLUR_FADE_DELAY * 10.5}>
+                        <div className="flex gap-4 text-xs text-muted-foreground pt-1">
+                            <span className="flex items-center gap-1.5">
+                                <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                                Proficient
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                                <span className="inline-block size-2 rounded-full bg-blue-500" />
+                                Familiar
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                                <span className="inline-block size-2 rounded-full bg-amber-500" />
+                                Learning
+                            </span>
+                        </div>
+                    </BlurFade>
+                </div>
+            </section>
+            <section id="open-source">
+                <div className="flex min-h-0 flex-col gap-y-3">
+                    <BlurFade delay={BLUR_FADE_DELAY * 10.6}>
+                        <h2 className="text-xl font-bold">Open Source</h2>
+                    </BlurFade>
+                    <BlurFade delay={BLUR_FADE_DELAY * 10.8}>
+                        <OSSHighlight projects={DATA.ossHighlights} />
+                    </BlurFade>
                 </div>
             </section>
             <section id="projects">
@@ -149,6 +207,17 @@ export default function Page() {
                                 </p>
                             </div>
                         </div>
+                    </BlurFade>
+                    <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
+                        <FeaturedProjectCard
+                            title={DATA.projects[0].title}
+                            description={DATA.projects[0].description}
+                            githubUrl={DATA.projects[0].href}
+                            websiteUrl={DATA.projects[0].links[0].href}
+                            image={DATA.projects[0].image}
+                            tags={DATA.projects[0].technologies}
+                            dates={DATA.projects[0].dates}
+                        />
                     </BlurFade>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
                         {DATA.projects.map((project, id) => (

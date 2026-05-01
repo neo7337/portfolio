@@ -30,6 +30,67 @@ export const DATA = {
         "GCP",
         "Shell Scripting"
     ],
+    categorizedSkills: [
+        {
+            category: "Languages",
+            items: [
+                { name: "Golang", level: "Proficient" as const },
+                { name: "Java", level: "Proficient" as const },
+                { name: "TypeScript", level: "Proficient" as const },
+                { name: "Node.js", level: "Proficient" as const },
+                { name: "Python", level: "Familiar" as const },
+            ],
+        },
+        {
+            category: "Frameworks",
+            items: [
+                { name: "Spring Boot", level: "Proficient" as const },
+                { name: "NestJS", level: "Proficient" as const },
+                { name: "React", level: "Familiar" as const },
+                { name: "Vue.js", level: "Familiar" as const },
+                { name: "Flutter", level: "Familiar" as const },
+                { name: "Langchain", level: "Learning" as const },
+            ],
+        },
+        {
+            category: "Cloud & Infra",
+            items: [
+                { name: "AWS", level: "Proficient" as const },
+                { name: "Docker", level: "Proficient" as const },
+                { name: "Kubernetes", level: "Proficient" as const },
+                { name: "Serverless", level: "Proficient" as const },
+                { name: "Terraform", level: "Familiar" as const },
+                { name: "GCP", level: "Familiar" as const },
+                { name: "Shell Scripting", level: "Familiar" as const },
+            ],
+        },
+        {
+            category: "Databases",
+            items: [
+                { name: "PostgreSQL", level: "Proficient" as const },
+                { name: "MongoDB", level: "Familiar" as const },
+                { name: "Redis", level: "Familiar" as const },
+            ],
+        },
+    ],
+    ossHighlights: [
+        {
+            name: "Golly SDK",
+            description: "A simple and powerful SDK for building Golang applications. Provides utilities for REST clients, messaging, caching, logging, and more.",
+            githubUrl: "https://github.com/nandlabs/golly",
+            pkgUrl: "https://pkg.go.dev/oss.nandlabs.io/golly",
+            repo: "nandlabs/golly",
+            tags: ["Golang", "SDK", "Open Source"],
+        },
+        {
+            name: "go-struct-validator",
+            description: "A Golang struct validation library based on the OpenAPI Specification (OAS). Enables comprehensive, standards-driven validation for Go structs.",
+            githubUrl: "https://github.com/neo7337/go-struct-validator",
+            pkgUrl: "https://pkg.go.dev/github.com/neo7337/go-struct-validator",
+            repo: "neo7337/go-struct-validator",
+            tags: ["Golang", "Validation", "OpenAPI"],
+        },
+    ],
     navbar: [
         { href: "/", icon: HomeIcon, label: "Home" },
         { href: "/blog", icon: NotebookIcon, label: "Blog" },
