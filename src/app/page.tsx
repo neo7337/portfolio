@@ -1,15 +1,10 @@
-'use client';
-
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
-import { downloadPDF } from "@/lib/utils";
 import { BlogsMarquee } from "@/components/blogs-marquee";
 import { ImpactCounterStrip } from "@/components/impact-counter";
 import { CurrentlyStrip } from "@/components/currently-strip";
@@ -17,14 +12,32 @@ import { OSSHighlight } from "@/components/oss-highlight";
 import { FeaturedProjectCard } from "@/components/featured-project-card";
 import { TerminalHero } from "@/components/terminal-hero";
 import { BlogGrid } from "@/components/blog-grid";
+import { CVDownloadButton } from "@/components/cv-download-button";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function Page() {
-
-    const handleDownload = () => {
-        downloadPDF('Aditya_Kumar_Resume.pdf');
+async function getGitHubStats(repo: string): Promise<{ stars: number; forks: number }> {
+    try {
+        const res = await fetch(`https://api.github.com/repos/${repo}`, {
+            next: { revalidate: 3600 },
+            headers: { Accept: "application/vnd.github+json" },
+        });
+        if (!res.ok) return { stars: 0, forks: 0 };
+        const data = await res.json();
+        return { stars: data.stargazers_count ?? 0, forks: data.forks_count ?? 0 };
+    } catch {
+        return { stars: 0, forks: 0 };
     }
+}
+
+export default async function Page() {
+    const projectStats = await Promise.all(
+        DATA.projects.map((p) =>
+            "githubRepo" in p && p.githubRepo
+                ? getGitHubStats(p.githubRepo as string)
+                : Promise.resolve({ stars: undefined, forks: undefined })
+        )
+    );
 
     return (
         <main className="flex flex-col min-h-[100dvh] space-y-10">
@@ -65,14 +78,7 @@ export default function Page() {
                         {DATA.summary}
                     </Markdown>
                     <br />
-                    <Button
-                        type="button"
-                        size="sm"
-                        className="px-2"
-                        onClick={handleDownload}
-                    >
-                        Download CV
-                    </Button>
+                    <CVDownloadButton />
                 </BlurFade>
             </section>
             <section id="work">
@@ -236,6 +242,8 @@ export default function Page() {
                                     image={project.image}
                                     video={project.video}
                                     links={project.links}
+                                    stars={projectStats[id].stars}
+                                    forks={projectStats[id].forks}
                                 />
                             </BlurFade>
                         ))}

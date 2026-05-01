@@ -233,6 +233,7 @@ export const DATA = {
             image: "/projects/go-initializer.png",
             video:
                 "",
+            githubRepo: "neo7337/go-initializer",
         },
         {
             title: "trekyourworld",
@@ -259,6 +260,7 @@ export const DATA = {
             image: "/projects/trekyourworld.png",
             video:
                 "",
+            githubRepo: "neo7337/trekYourWorld",
         },
         {
             title: "Golly",
@@ -280,6 +282,7 @@ export const DATA = {
             image: "",
             video:
                 "",
+            githubRepo: "nandlabs/golly",
         },
         {
             title: "Go Struct Validator",
@@ -301,6 +304,7 @@ export const DATA = {
             image: "",
             video:
                 "/projects/go-struct-validator.mp4",
+            githubRepo: "neo7337/go-struct-validator",
         }
     ]
 } as const;

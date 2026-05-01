@@ -1,10 +1,17 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import Marquee from "./magicui/marquee";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
+
+interface BlogItem {
+    img: string;
+    title: string;
+    url: string;
+    tags: string[];
+    publishDate: string;
+    userName: string;
+    description: string;
+}
 
 const ReviewCard = ({
     img,
@@ -14,15 +21,7 @@ const ReviewCard = ({
     publishDate,
     userName,
     description
-}: {
-    img: string;
-    title: string;
-    url: string;
-    tags: string[];
-    publishDate: string;
-    userName: string;
-    description: string
-}) => {
+}: BlogItem) => {
     return (
         <Link href={url} key={url} target="_blank">
         <figure
@@ -65,29 +64,31 @@ const ReviewCard = ({
     );
 };
 
-export function BlogsMarquee() {
+async function fetchBlogData(): Promise<BlogItem[]> {
+    try {
+        const response = await fetch("https://dev.to/api/articles?username=adi73", {
+            next: { revalidate: 3600 },
+        });
+        if (!response.ok) return [];
+        const data = await response.json();
+        return data.map((item: any) => ({
+            img: "https://avatar.vercel.sh/AK",
+            title: item.title,
+            url: item.url,
+            tags: item.tag_list,
+            publishDate: item.readable_publish_date,
+            userName: "@" + item.user.username,
+            description: item.description,
+        }));
+    } catch {
+        return [];
+    }
+}
 
-    const [blogData, setBlogData] = useState<any[]>([]);
+export async function BlogsMarquee() {
+    const blogData = await fetchBlogData();
 
-    useEffect(() => {
-        async function fetchArticles() {
-            const blogsList: any[] = []
-            const response = await fetch("https://dev.to/api/articles?username=adi73").then(resp => resp.json());
-            response.map((item: any) => {
-                blogsList.push({
-                    img: "https://avatar.vercel.sh/AK",
-                    title: item.title,
-                    url: item.url,
-                    tags: item.tag_list,
-                    publishDate: item.readable_publish_date,
-                    userName: '@' + item.user.username,
-                    description: item.description
-                })
-            })
-            setBlogData(blogsList)
-        }
-        fetchArticles();
-    }, [])
+    if (blogData.length === 0) return null;
 
     return (
         <div className="relative flex h-[400px] w-full flex-col items-center justify-center overflow-hidden">
@@ -99,5 +100,5 @@ export function BlogsMarquee() {
             <div className="pointer-events-none absolute inset-y-0 left-0 bg-gradient-to-r from-white dark:from-background"></div>
             <div className="pointer-events-none absolute inset-y-0 right-0 bg-gradient-to-l from-white dark:from-background"></div>
         </div>
-    )
+    );
 }

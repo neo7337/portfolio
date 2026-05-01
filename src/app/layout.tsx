@@ -63,6 +63,28 @@ export default function RootLayout({
             >
                 <ThemeProvider attribute="class" defaultTheme="light">
                     <TooltipProvider delayDuration={0}>
+                        <script
+                            type="application/ld+json"
+                            suppressHydrationWarning
+                            dangerouslySetInnerHTML={{
+                                __html: JSON.stringify({
+                                    "@context": "https://schema.org",
+                                    "@type": "Person",
+                                    name: DATA.name,
+                                    url: DATA.url,
+                                    sameAs: [
+                                        DATA.contact.social.GitHub.url,
+                                        DATA.contact.social.LinkedIn.url,
+                                        DATA.contact.social.X.url,
+                                    ],
+                                    jobTitle: "Senior Consultant - Developer",
+                                    worksFor: {
+                                        "@type": "Organization",
+                                        name: "Thoughtworks",
+                                    },
+                                }),
+                            }}
+                        />
                         {children}
                         <Navbar />
                     </TooltipProvider>
