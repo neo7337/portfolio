@@ -2,7 +2,6 @@ import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import { BlogsMarquee } from "@/components/blogs-marquee";
@@ -31,29 +30,34 @@ async function getGitHubStats(repo: string): Promise<{ stars: number; forks: num
 }
 
 export default async function Page() {
-    const projectStats = await Promise.all(
-        DATA.projects.map((p) =>
-            "githubRepo" in p && p.githubRepo
-                ? getGitHubStats(p.githubRepo as string)
-                : Promise.resolve({ stars: undefined, forks: undefined })
-        )
-    );
+    const [projectStats, ossStats] = await Promise.all([
+        Promise.all(
+            DATA.projects.map((p) =>
+                "githubRepo" in p && p.githubRepo
+                    ? getGitHubStats(p.githubRepo as string)
+                    : Promise.resolve({ stars: undefined, forks: undefined })
+            )
+        ),
+        Promise.all(
+            DATA.ossHighlights.map((p) => getGitHubStats(p.repo))
+        ),
+    ]);
 
     return (
-        <main className="flex flex-col min-h-[100dvh] space-y-10">
+        <main className="flex flex-col min-h-[100dvh] space-y-16">
             <section id="hero">
                 <div className="mx-auto w-full max-w-2xl space-y-8">
-                    <div className="gap-2 flex justify-between">
+                    <div className="gap-4 flex justify-between items-start">
                         <div className="flex-col flex flex-1 space-y-1.5">
                             <BlurFade delay={BLUR_FADE_DELAY} inView>
                                 <TerminalHero
-                                    greeting={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
+                                    greeting={`Hi, I'm ${DATA.name.split(" ")[0]} \u{1F44B}`}
                                     tagline={DATA.description}
                                 />
                             </BlurFade>
                         </div>
                         <BlurFade delay={BLUR_FADE_DELAY}>
-                            <Avatar className="size-28 border">
+                            <Avatar className="size-32 border-2 border-border ring-2 ring-indigo-500/40 ring-offset-2 ring-offset-background">
                                 <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
                                 <AvatarFallback>{DATA.initials}</AvatarFallback>
                             </Avatar>
@@ -69,8 +73,9 @@ export default async function Page() {
             </BlurFade>
             <section id="about">
                 <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                    <h2 className="text-xl font-bold">
+                    <h2 className="text-2xl font-bold tracking-tight">
                         About
+                        <span className="h-0.5 w-8 bg-indigo-500 block mt-1.5 rounded-full" />
                     </h2>
                 </BlurFade>
                 <BlurFade delay={BLUR_FADE_DELAY * 4}>
@@ -84,16 +89,19 @@ export default async function Page() {
             <section id="work">
                 <div className="flex min-h-0 flex-col gap-y-3">
                     <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                        <h2 className="text-xl font-bold">Work Experience</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">
+                            Work Experience
+                            <span className="h-0.5 w-8 bg-indigo-500 block mt-1.5 rounded-full" />
+                        </h2>
                     </BlurFade>
-                    <div className="relative ml-3 border-l-2 border-muted pl-6">
+                    <div className="relative ml-3 border-l-2 border-indigo-500/20 pl-6">
                         {DATA.work.map((work, id) => (
                             <BlurFade
                                 key={work.company}
                                 delay={BLUR_FADE_DELAY * 6 + id * 0.05}
                             >
                                 <div className="relative mb-4 last:mb-0">
-                                    <span className="absolute -left-[31px] top-3 flex size-4 items-center justify-center rounded-full border-2 border-muted bg-background ring-2 ring-background" />
+                                    <span className="absolute -left-[31px] top-3 flex size-4 items-center justify-center rounded-full border-2 border-indigo-500/70 bg-indigo-500/20 ring-2 ring-background shadow-sm shadow-indigo-500/40" />
                                     <ResumeCard
                                         key={work.company}
                                         logoUrl={work.logoUrl}
@@ -104,6 +112,7 @@ export default async function Page() {
                                         badges={work.badges}
                                         period={`${work.start} - ${work.end ?? "Present"}`}
                                         description={work.description}
+                                        bullets={work.bullets}
                                         tech={work.tech}
                                     />
                                 </div>
@@ -115,7 +124,10 @@ export default async function Page() {
             <section id="education">
                 <div className="flex min-h-0 flex-col gap-y-3">
                     <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                        <h2 className="text-xl font-bold">Education</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">
+                            Education
+                            <span className="h-0.5 w-8 bg-indigo-500 block mt-1.5 rounded-full" />
+                        </h2>
                     </BlurFade>
                     {DATA.education.map((education, id) => (
                         <BlurFade
@@ -138,7 +150,10 @@ export default async function Page() {
             <section id="skills">
                 <div className="flex min-h-0 flex-col gap-y-3">
                     <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                        <h2 className="text-xl font-bold">Skills</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">
+                            Skills
+                            <span className="h-0.5 w-8 bg-indigo-500 block mt-1.5 rounded-full" />
+                        </h2>
                     </BlurFade>
                     {DATA.categorizedSkills.map((category, catId) => (
                         <BlurFade key={category.category} delay={BLUR_FADE_DELAY * 10 + catId * 0.05}>
@@ -148,22 +163,20 @@ export default async function Page() {
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {category.items.map((skill) => (
-                                        <div key={skill.name} className="flex items-center gap-1">
-                                            <Badge variant="secondary" className="text-xs">
-                                                {skill.name}
-                                            </Badge>
-                                            <span className={
-                                                "text-[9px] font-medium px-1 py-0.5 rounded " + (
+                                        <span
+                                            key={skill.name}
+                                            className={
+                                                "inline-flex items-center rounded-md border px-2.5 py-1 text-xs font-mono font-medium transition-colors " + (
                                                     skill.level === "Proficient"
-                                                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                                                        ? "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
                                                         : skill.level === "Familiar"
-                                                        ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                                                        : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                        ? "bg-violet-500/15 text-violet-300 border-violet-500/30"
+                                                        : "bg-amber-500/15 text-amber-300 border-amber-500/30"
                                                 )
-                                            }>
-                                                {skill.level}
-                                            </span>
-                                        </div>
+                                            }
+                                        >
+                                            {skill.name}
+                                        </span>
                                     ))}
                                 </div>
                             </div>
@@ -172,11 +185,11 @@ export default async function Page() {
                     <BlurFade delay={BLUR_FADE_DELAY * 10.5}>
                         <div className="flex gap-4 text-xs text-muted-foreground pt-1">
                             <span className="flex items-center gap-1.5">
-                                <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                                <span className="inline-block size-2 rounded-full bg-indigo-500" />
                                 Proficient
                             </span>
                             <span className="flex items-center gap-1.5">
-                                <span className="inline-block size-2 rounded-full bg-blue-500" />
+                                <span className="inline-block size-2 rounded-full bg-violet-500" />
                                 Familiar
                             </span>
                             <span className="flex items-center gap-1.5">
@@ -190,10 +203,13 @@ export default async function Page() {
             <section id="open-source">
                 <div className="flex min-h-0 flex-col gap-y-3">
                     <BlurFade delay={BLUR_FADE_DELAY * 10.6}>
-                        <h2 className="text-xl font-bold">Open Source</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">
+                            Open Source
+                            <span className="h-0.5 w-8 bg-indigo-500 block mt-1.5 rounded-full" />
+                        </h2>
                     </BlurFade>
                     <BlurFade delay={BLUR_FADE_DELAY * 10.8}>
-                        <OSSHighlight projects={DATA.ossHighlights} />
+                        <OSSHighlight projects={DATA.ossHighlights} stats={ossStats} />
                     </BlurFade>
                 </div>
             </section>
@@ -202,7 +218,7 @@ export default async function Page() {
                     <BlurFade delay={BLUR_FADE_DELAY * 11}>
                         <div className="flex flex-col items-center justify-center space-y-4 text-center">
                             <div className="space-y-2">
-                                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                                <div className="inline-block rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 px-3 py-1 text-sm font-mono">
                                     My Projects
                                 </div>
                                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -255,7 +271,7 @@ export default async function Page() {
                     <BlurFade delay={BLUR_FADE_DELAY * 13}>
                         <div className="flex flex-col items-center justify-center space-y-4 text-center">
                             <div className="space-y-2">
-                                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                                <div className="inline-block rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 px-3 py-1 text-sm font-mono">
                                     Posts
                                 </div>
                                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -276,7 +292,7 @@ export default async function Page() {
                 <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
                     <BlurFade delay={BLUR_FADE_DELAY * 16}>
                         <div className="space-y-3">
-                            <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                            <div className="inline-block rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 px-3 py-1 text-sm font-mono">
                                 Contact
                             </div>
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">

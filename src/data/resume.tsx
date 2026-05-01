@@ -8,7 +8,7 @@ export const DATA = {
     location: "Gurugram, India",
     locationLink: "https://www.google.com/maps/place/Gurugram,+Haryana",
     description:
-        "Backend Engineer focused on distributed systems, Golang, and cloud-native infrastructure — building fast, scalable systems and open-source tools.",
+        "Full Stack Engineer building distributed systems, cloud-native backends, and modern web apps — open source contributor and platform thinker.",
     summary:
         "- **6+ years** building production-grade backend systems in Golang, Java, and Node.js across distributed, cloud-native environments.\n- At **Thoughtworks**, leveraging Gen-AI and AI agents (Langchain) to accelerate client migrations and build intelligent solutions.\n- At **Macquarie**, engineered a serverless AWS Lambda + Golang solution that cut infrastructure costs **40%** and boosted operational efficiency **60%**; led on-prem → AWS migration with **98% reduction** in downtime.\n- At **MiRus**, delivered a **50% performance improvement** on a medical surgical platform by re-architecting critical modules in Spring Boot.\n- Open-source contributor: [Golly SDK](https://github.com/nandlabs/golly), [go-struct-validator](https://github.com/neo7337/go-struct-validator), [go-initializer](https://github.com/neo7337/go-initializer).",
     avatarUrl: "/me.png",
@@ -144,6 +144,11 @@ export const DATA = {
             end: "Present",
             description:
                 "Utilizing Gen-AI technologies to build client solutions and accelerate migrations.",
+            bullets: [
+                "Leveraging **Gen-AI** and **Langchain**-powered AI agents to accelerate client migrations and build intelligent automation solutions.",
+                "Collaborating with clients on **distributed system design** and cloud-native architectures using Golang, Java, and AWS.",
+                "Driving adoption of AI-assisted development workflows to reduce delivery timelines across engagements.",
+            ],
             tech: ["Java", "Python", "AWS", "Golang", "Generative AI", "AI Agents", "Langchain"]
         },
         {
@@ -157,6 +162,13 @@ export const DATA = {
             end: "September 2025",
             description:
                 "I developed a customer-facing, GenAI-powered mobile platform from the ground up with a mobile-first approach using Flutter, ensuring seamless cross-platform performance and an intuitive user experience. On the backend, I designed and built over 7 microservices in Golang, optimized for scalability and performance, with PostgreSQL as the primary database. To enhance system responsiveness and fault tolerance, I implemented an event-driven architecture using message queues. I also integrated the Stripe payment gateway to enable secure, in-app transactions and subscription handling. Throughout the project, I maintained clean code practices, implemented test coverage, and established CI/CD pipelines to ensure high code quality and rapid, reliable deployments.",
+            bullets: [
+                "Built a **GenAI-powered mobile platform** from scratch using **Flutter** with a mobile-first approach, delivering seamless cross-platform UX.",
+                "Designed and developed **7+ Golang microservices** backed by PostgreSQL, optimized for scalability and high throughput.",
+                "Implemented **event-driven architecture** with message queues to improve system responsiveness and fault tolerance.",
+                "Integrated **Stripe payment gateway** for secure in-app transactions and subscription lifecycle management.",
+                "Established **CI/CD pipelines** with GitHub Actions ensuring high code quality and rapid, reliable deployments.",
+            ],
             tech: ["Golang", "Typescript", "ReactJS", "PostgreSQL", "System Design", "AWS", "GCP", "Microservices", "Event-Driven Architecture", "Stripe Integration", "CI/CD", "Flutter", "Github Actions"]
         },
         {
@@ -170,6 +182,12 @@ export const DATA = {
             end: "October 2024",
             description:
                 "I worked on the GALILEO™ Surgical Planning and RPM platforms, where I set up a fully automated AWS infrastructure using Terraform to ensure scalability and consistency. On the frontend, I developed responsive and intuitive user interfaces using Vue.js and TypeScript. I also built and maintained robust backend services with Node.js, TypeScript, and PostgreSQL, and later developed high-performance modules for the GALILEO™ RPM system using Java 17 and Spring Boot, resulting in a 50% improvement in performance.",
+            bullets: [
+                "Engineered features for the **GALILEO™ Surgical Planning and RPM platforms** — mission-critical medical software used in orthopedic surgery.",
+                "Provisioned fully automated **AWS infrastructure with Terraform**, ensuring environment consistency and zero-touch deployments.",
+                "Built responsive frontends in **Vue.js + TypeScript** and robust backend services with **Node.js, TypeScript, and PostgreSQL**.",
+                "Re-architected critical modules in **Java 17 + Spring Boot**, delivering a **50% improvement in system performance**.",
+            ],
             tech: ["Node.js", "Typescript", "VueJS", "Docker", "Medical Image Processing", "AWS", "Spring Boot", "PostgreSQL"]
         },
         {
@@ -183,6 +201,13 @@ export const DATA = {
             end: "February 2022",
             description:
                 "I engineered a serverless solution using AWS Lambda and Golang, which improved operational efficiency by 60% and cut infrastructure costs by 40% through a scalable, event-driven architecture. I also built a self-service CI/CD portal that automated 95% of deployment processes, simplifying workflows and boosting performance by 85%. As part of a major modernization effort, I led the migration from on-prem infrastructure to AWS Cloud, enhancing scalability and security while reducing downtime by 98%. Additionally, I deployed a Kubernetes architecture on Amazon EKS using Gloo Microgateway for secure and efficient traffic management, and implemented GitOps with ArgoCD to streamline CI/CD pipelines and ensure consistent, automated application delivery.",
+            bullets: [
+                "Engineered a **serverless AWS Lambda + Golang** solution that boosted operational efficiency by **60%** and cut infrastructure costs by **40%** via event-driven architecture.",
+                "Built a self-service **CI/CD portal** that automated **95%** of deployment workflows, improving delivery performance by **85%**.",
+                "Led **on-prem → AWS Cloud migration** for core banking systems, reducing production downtime by **98%** and improving scalability.",
+                "Deployed **Kubernetes on Amazon EKS** with Gloo Microgateway for secure, high-throughput traffic management.",
+                "Implemented **GitOps with ArgoCD** to enforce declarative, automated application delivery across environments.",
+            ],
             tech: ["Golang", "AWS Lambda", "Serverless Architecture", "Docker", "Kubernetes", "Helm", "GitOps", "AWS", "GKE", "Node.js", "CI/CD", "Spring Boot"]
         },
         {
@@ -196,6 +221,11 @@ export const DATA = {
             end: "October 2019",
             description:
                 "As a key member of the core development team, I spearheaded complex third-party integrations that enhanced overall project functionality and stability. I also developed new features for an internal automation tool, reducing manual boilerplate code generation by 90% and improving developer efficiency. Additionally, I implemented end-to-end automation for custom Excel sheet generation, achieving 100% automation and eliminating the need for manual intervention.",
+            bullets: [
+                "Spearheaded **complex third-party integrations** as a core team member, improving overall product functionality and system stability.",
+                "Developed new features for an internal developer tool, reducing **manual boilerplate code generation by 90%** and improving team velocity.",
+                "Implemented **end-to-end Excel sheet generation automation**, achieving **100% automation** and eliminating all manual intervention.",
+            ],
             tech: ["Java", "Javascript", "SQL", "Integrations"]
         }
     ],
@@ -230,7 +260,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "/projects/go-initializer.png",
+            image: undefined,
             video:
                 "",
             githubRepo: "neo7337/go-initializer",
@@ -257,7 +287,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "/projects/trekyourworld.png",
+            image: undefined,
             video:
                 "",
             githubRepo: "neo7337/trekYourWorld",

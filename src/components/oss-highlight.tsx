@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Star, GitFork, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -15,37 +12,14 @@ export interface OSSProject {
     tags: readonly string[];
 }
 
-function GitHubStats({ repo }: { repo: string }) {
-    const [stats, setStats] = useState<{ stars: number; forks: number } | null>(null);
-
-    useEffect(() => {
-        fetch(`https://api.github.com/repos/${repo}`)
-            .then((r) => r.json())
-            .then((d) => setStats({ stars: d.stargazers_count ?? 0, forks: d.forks_count ?? 0 }))
-            .catch(() => {});
-    }, [repo]);
-
-    if (!stats) {
-        return <span className="inline-block h-4 w-16 animate-pulse rounded bg-muted" />;
-    }
-
-    return (
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-                <Star className="size-3" fill="currentColor" />
-                {stats.stars.toLocaleString()}
-            </span>
-            <span className="flex items-center gap-1">
-                <GitFork className="size-3" />
-                {stats.forks.toLocaleString()}
-            </span>
-        </div>
-    );
+interface OSSCardProps extends OSSProject {
+    stars: number;
+    forks: number;
 }
 
-function OSSCard({ name, description, githubUrl, pkgUrl, repo, tags }: OSSProject) {
+function OSSCard({ name, description, githubUrl, pkgUrl, tags, stars, forks }: OSSCardProps) {
     return (
-        <div className="flex flex-col gap-3 rounded-lg border p-4 hover:bg-muted/30 transition-colors">
+        <div className="flex flex-col gap-3 rounded-lg border border-border bg-card/50 backdrop-blur-sm p-4 hover:border-indigo-500/40 hover:shadow-md hover:shadow-indigo-500/10 transition-all duration-300">
             <div className="space-y-1">
                 <h3 className="font-semibold text-sm">{name}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
@@ -58,7 +32,16 @@ function OSSCard({ name, description, githubUrl, pkgUrl, repo, tags }: OSSProjec
                 ))}
             </div>
             <div className="flex items-center justify-between">
-                <GitHubStats repo={repo} />
+                <div className="flex items-center gap-3 text-xs">
+                    <span className="flex items-center gap-1 text-indigo-400 font-mono font-medium">
+                        <Star className="size-3" fill="currentColor" />
+                        {stars.toLocaleString()}
+                    </span>
+                    <span className="flex items-center gap-1 text-indigo-400/70 font-mono">
+                        <GitFork className="size-3" />
+                        {forks.toLocaleString()}
+                    </span>
+                </div>
                 <div className="flex gap-3">
                     <Link
                         href={githubUrl}
@@ -84,11 +67,22 @@ function OSSCard({ name, description, githubUrl, pkgUrl, repo, tags }: OSSProjec
     );
 }
 
-export function OSSHighlight({ projects }: { projects: readonly OSSProject[] }) {
+export function OSSHighlight({
+    projects,
+    stats,
+}: {
+    projects: readonly OSSProject[];
+    stats: { stars: number; forks: number }[];
+}) {
     return (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {projects.map((p) => (
-                <OSSCard key={p.name} {...p} />
+            {projects.map((p, i) => (
+                <OSSCard
+                    key={p.name}
+                    {...p}
+                    stars={stats[i]?.stars ?? 0}
+                    forks={stats[i]?.forks ?? 0}
+                />
             ))}
         </div>
     );

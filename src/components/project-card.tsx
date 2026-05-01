@@ -48,7 +48,7 @@ export function ProjectCard({
     return (
         <Card
             className={
-                "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
+                "flex flex-col overflow-hidden border hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 ease-out h-full"
             }
         >
             <Link
@@ -108,13 +108,13 @@ export function ProjectCard({
                     {(stars !== undefined || forks !== undefined) && (
                         <div className="flex items-center gap-3 text-xs text-muted-foreground">
                             {stars !== undefined && (
-                                <span className="flex items-center gap-1">
+                                <span className="flex items-center gap-1 text-indigo-400 font-mono">
                                     <Star className="size-3" fill="currentColor" />
                                     {stars.toLocaleString()}
                                 </span>
                             )}
                             {forks !== undefined && (
-                                <span className="flex items-center gap-1">
+                                <span className="flex items-center gap-1 text-indigo-400/70 font-mono">
                                     <GitFork className="size-3" />
                                     {forks.toLocaleString()}
                                 </span>

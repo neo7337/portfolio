@@ -24,7 +24,7 @@ export function FeaturedProjectCard({
     dates,
 }: FeaturedProjectCardProps) {
     return (
-        <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-muted/40 to-transparent p-6 hover:shadow-md transition-shadow">
+        <div className="relative overflow-hidden rounded-xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/40 via-card to-transparent p-6 hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300">
             <div className="flex flex-col sm:flex-row gap-6">
                 {image && (
                     <div className="relative h-44 w-full sm:w-64 shrink-0 overflow-hidden rounded-lg border">
@@ -34,7 +34,7 @@ export function FeaturedProjectCard({
                 <div className="flex flex-col justify-between gap-4 min-w-0">
                     <div className="space-y-2">
                         <div className="flex items-center gap-2 flex-wrap">
-                            <span className="inline-block rounded-md bg-foreground text-background px-2 py-0.5 text-xs font-medium">
+                            <span className="inline-block rounded-md bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 text-xs font-medium font-mono">
                                 Featured
                             </span>
                             <h3 className="text-xl font-bold tracking-tight">{title}</h3>

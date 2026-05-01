@@ -22,7 +22,7 @@ function BlogGridCard({ title, url, coverImage, tags, publishedAt, description, 
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-col overflow-hidden rounded-xl border hover:shadow-md transition-all duration-200"
+            className="group flex flex-col overflow-hidden rounded-xl border hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300"
         >
             <div className="relative h-40 w-full bg-muted overflow-hidden">
                 {coverImage ? (
@@ -30,6 +30,7 @@ function BlogGridCard({ title, url, coverImage, tags, publishedAt, description, 
                         src={coverImage}
                         alt={title}
                         fill
+                        sizes="(max-width: 640px) 100vw, 33vw"
                         className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                 ) : (

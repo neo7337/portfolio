@@ -8,8 +8,8 @@ const CURRENT_ITEMS = [
 
 export function CurrentlyStrip() {
     return (
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-dashed px-4 py-3 text-sm">
-            <span className="font-semibold shrink-0">Currently →</span>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-sm">
+            <span className="font-semibold shrink-0 text-indigo-400">Currently →</span>
             {CURRENT_ITEMS.map((item, i) => (
                 <span key={item.label} className="flex items-center gap-1.5">
                     <span className="text-muted-foreground">{item.verb}</span>

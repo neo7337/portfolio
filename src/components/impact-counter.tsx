@@ -50,7 +50,7 @@ function StatItem({ label, value, suffix }: (typeof STATS)[number]) {
 
     return (
         <div ref={ref} className="flex flex-col items-center gap-1">
-            <span className="text-3xl font-bold tabular-nums tracking-tight">
+            <span className="text-3xl font-bold tabular-nums tracking-tight text-indigo-400 font-mono">
                 {count}{suffix}
             </span>
             <span className="text-xs text-muted-foreground text-center">{label}</span>
@@ -60,7 +60,7 @@ function StatItem({ label, value, suffix }: (typeof STATS)[number]) {
 
 export function ImpactCounterStrip() {
     return (
-        <div className="grid grid-cols-4 gap-4 rounded-xl border bg-muted/30 px-6 py-5">
+        <div className="grid grid-cols-4 gap-4 rounded-xl border border-border bg-card/50 backdrop-blur-sm px-6 py-5">
             {STATS.map((s) => (
                 <StatItem key={s.label} {...s} />
             ))}
