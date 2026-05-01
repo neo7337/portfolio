@@ -15,14 +15,15 @@ import { ImpactCounterStrip } from "@/components/impact-counter";
 import { CurrentlyStrip } from "@/components/currently-strip";
 import { OSSHighlight } from "@/components/oss-highlight";
 import { FeaturedProjectCard } from "@/components/featured-project-card";
+import { TerminalHero } from "@/components/terminal-hero";
+import { BlogGrid } from "@/components/blog-grid";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
 
     const handleDownload = () => {
-        const fileName = 'Aditya_Resume.pdf'; // Desired filename
-        downloadPDF(fileName);
+        downloadPDF('Aditya_Kumar_Resume.pdf');
     }
 
     return (
@@ -31,17 +32,12 @@ export default function Page() {
                 <div className="mx-auto w-full max-w-2xl space-y-8">
                     <div className="gap-2 flex justify-between">
                         <div className="flex-col flex flex-1 space-y-1.5">
-                            <BlurFadeText
-                                delay={BLUR_FADE_DELAY}
-                                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                                yOffset={8}
-                                text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
-                            />
-                            <BlurFadeText
-                                className="max-w-[600px] md:text-xl"
-                                delay={BLUR_FADE_DELAY}
-                                text={DATA.description}
-                            />
+                            <BlurFade delay={BLUR_FADE_DELAY} inView>
+                                <TerminalHero
+                                    greeting={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
+                                    tagline={DATA.description}
+                                />
+                            </BlurFade>
                         </div>
                         <BlurFade delay={BLUR_FADE_DELAY}>
                             <Avatar className="size-28 border">
@@ -84,25 +80,30 @@ export default function Page() {
                     <BlurFade delay={BLUR_FADE_DELAY * 5}>
                         <h2 className="text-xl font-bold">Work Experience</h2>
                     </BlurFade>
-                    {DATA.work.map((work, id) => (
-                        <BlurFade
-                            key={work.company}
-                            delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-                        >
-                            <ResumeCard
+                    <div className="relative ml-3 border-l-2 border-muted pl-6">
+                        {DATA.work.map((work, id) => (
+                            <BlurFade
                                 key={work.company}
-                                logoUrl={work.logoUrl}
-                                altText={work.company}
-                                title={work.company}
-                                subtitle={work.title}
-                                href={work.href}
-                                badges={work.badges}
-                                period={`${work.start} - ${work.end ?? "Present"}`}
-                                description={work.description}
-                                tech={work.tech}
-                            />
-                        </BlurFade>
-                    ))}
+                                delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+                            >
+                                <div className="relative mb-4 last:mb-0">
+                                    <span className="absolute -left-[31px] top-3 flex size-4 items-center justify-center rounded-full border-2 border-muted bg-background ring-2 ring-background" />
+                                    <ResumeCard
+                                        key={work.company}
+                                        logoUrl={work.logoUrl}
+                                        altText={work.company}
+                                        title={work.company}
+                                        subtitle={work.title}
+                                        href={work.href}
+                                        badges={work.badges}
+                                        period={`${work.start} - ${work.end ?? "Present"}`}
+                                        description={work.description}
+                                        tech={work.tech}
+                                    />
+                                </div>
+                            </BlurFade>
+                        ))}
+                    </div>
                 </div>
             </section>
             <section id="education">
@@ -242,15 +243,21 @@ export default function Page() {
                 </div>
             </section>
             <section id="blog-posts">
-                <div className="space-y-12 w-full py-12">
+                <div className="space-y-8 w-full py-12">
                     <BlurFade delay={BLUR_FADE_DELAY * 13}>
                         <div className="flex flex-col items-center justify-center space-y-4 text-center">
                             <div className="space-y-2">
                                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                                     Posts
                                 </div>
+                                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                                    Latest Writing
+                                </h2>
                             </div>
                         </div>
+                    </BlurFade>
+                    <BlurFade delay={BLUR_FADE_DELAY * 13.5}>
+                        <BlogGrid />
                     </BlurFade>
                     <BlurFade delay={BLUR_FADE_DELAY * 14}>
                         <BlogsMarquee />
@@ -265,11 +272,11 @@ export default function Page() {
                                 Contact
                             </div>
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                                Get in Touch
+                                Let&apos;s Work Together
                             </h2>
                             <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                You can reach out to me via below social profiles.<br />
-                                Happy to Connect!
+                                Open to <strong>senior engineering roles</strong> and <strong>consulting engagements</strong> — distributed systems, cloud-native backends, and AI-powered tooling.
+                                Reach out via any of the links below.
                             </p>
                         </div>
                     </BlurFade>

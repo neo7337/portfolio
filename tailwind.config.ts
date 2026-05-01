@@ -79,12 +79,17 @@ const config = {
                     from: { transform: "translateY(0)" },
                     to: { transform: "translateY(calc(-100% - var(--gap)))" },
                 },
+                blink: {
+                    "0%, 100%": { opacity: "1" },
+                    "50%": { opacity: "0" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 marquee: "marquee var(--duration) linear infinite",
                 "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+                blink: "blink 1s step-end infinite",
             },
         },
     },
