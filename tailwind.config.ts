@@ -21,6 +21,7 @@ const config = {
         extend: {
             fontFamily: {
                 sans: ["var(--font-sans)", ...fontFamily.sans],
+                mono: ["var(--font-mono)", ...fontFamily.mono],
             },
             colors: {
                 border: "hsl(var(--border))",
@@ -79,12 +80,27 @@ const config = {
                     from: { transform: "translateY(0)" },
                     to: { transform: "translateY(calc(-100% - var(--gap)))" },
                 },
+                blink: {
+                    "0%, 100%": { opacity: "1" },
+                    "50%": { opacity: "0" },
+                },
+                "glow-pulse": {
+                    "0%, 100%": { boxShadow: "0 0 8px 0 hsl(239 84% 67% / 0.3)" },
+                    "50%": { boxShadow: "0 0 20px 4px hsl(239 84% 67% / 0.5)" },
+                },
+                shimmer: {
+                    from: { backgroundPosition: "200% center" },
+                    to: { backgroundPosition: "-200% center" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 marquee: "marquee var(--duration) linear infinite",
                 "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+                blink: "blink 1s step-end infinite",
+                "glow-pulse": "glow-pulse 2.5s ease-in-out infinite",
+                shimmer: "shimmer 3s linear infinite",
             },
         },
     },

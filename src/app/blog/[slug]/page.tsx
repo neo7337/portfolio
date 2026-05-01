@@ -2,18 +2,18 @@ import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 export async function generateMetadata({
     params,
 }: {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }): Promise<Metadata | undefined> {
-    let post = await getPost(params.slug);
+    const { slug } = await params;
+    let post = await getPost(slug);
 
     let {
         title,
@@ -50,11 +50,12 @@ export async function generateMetadata({
 export default async function Blog({
     params,
 }: {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }) {
-    let post = await getPost(params.slug);
+    const { slug } = await params;
+    let post = await getPost(slug);
 
     if (!post) {
         notFound();
@@ -62,9 +63,9 @@ export default async function Blog({
 
     return (
         <section id="blog">
-            <Script
-                id="blog-schema"
+            <script
                 type="application/ld+json"
+                suppressHydrationWarning
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",

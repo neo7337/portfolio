@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { Star, GitFork } from "lucide-react";
 
 interface Props {
     title: string;
@@ -26,6 +27,8 @@ interface Props {
         href: string;
     }[];
     className?: string;
+    stars?: number;
+    forks?: number;
 }
 
 export function ProjectCard({
@@ -39,11 +42,13 @@ export function ProjectCard({
     video,
     links,
     className,
+    stars,
+    forks,
 }: Props) {
     return (
         <Card
             className={
-                "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
+                "flex flex-col overflow-hidden border hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 ease-out h-full"
             }
         >
             <Link
@@ -61,11 +66,14 @@ export function ProjectCard({
                     />
                 )}
                 {image && (
-                    <Image
-                        src={image}
-                        alt={title}
-                        className="h-40 w-full overflow-hidden object-cover object-top"
-                    />
+                    <div className="relative h-40 w-full overflow-hidden">
+                        <Image
+                            src={image}
+                            alt={title}
+                            fill
+                            className="object-cover object-top"
+                        />
+                    </div>
                 )}
             </Link>
             <CardHeader className="px-2">
@@ -96,18 +104,36 @@ export function ProjectCard({
                 )}
             </CardContent>
             <CardFooter className="px-2 pb-2">
-                {links && links.length > 0 && (
-                    <div className="flex flex-row flex-wrap items-start gap-1">
-                        {links?.map((link, idx) => (
-                            <Link href={link?.href} key={idx} target="_blank">
-                                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
-                                    {link.icon}
-                                    {link.type}
-                                </Badge>
-                            </Link>
-                        ))}
-                    </div>
-                )}
+                <div className="flex w-full flex-col gap-2">
+                    {(stars !== undefined || forks !== undefined) && (
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                            {stars !== undefined && (
+                                <span className="flex items-center gap-1 text-indigo-400 font-mono">
+                                    <Star className="size-3" fill="currentColor" />
+                                    {stars.toLocaleString()}
+                                </span>
+                            )}
+                            {forks !== undefined && (
+                                <span className="flex items-center gap-1 text-indigo-400/70 font-mono">
+                                    <GitFork className="size-3" />
+                                    {forks.toLocaleString()}
+                                </span>
+                            )}
+                        </div>
+                    )}
+                    {links && links.length > 0 && (
+                        <div className="flex flex-row flex-wrap items-start gap-1">
+                            {links?.map((link, idx) => (
+                                <Link href={link?.href} key={idx} target="_blank">
+                                    <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
+                                        {link.icon}
+                                        {link.type}
+                                    </Badge>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </CardFooter>
         </Card>
     );

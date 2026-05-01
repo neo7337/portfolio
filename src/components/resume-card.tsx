@@ -21,8 +21,28 @@ interface ResumeCardProps {
     badges?: readonly string[];
     period: string;
     description?: string;
+    bullets?: readonly string[];
     tech?: readonly string[]
 }
+
+/** Renders a string with **bold** markers as inline spans */
+function InlineBold({ text }: { text: string }) {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return (
+        <>
+            {parts.map((part, i) =>
+                part.startsWith("**") && part.endsWith("**") ? (
+                    <strong key={i} className="text-foreground font-semibold">
+                        {part.slice(2, -2)}
+                    </strong>
+                ) : (
+                    <span key={i}>{part}</span>
+                )
+            )}
+        </>
+    );
+}
+
 export const ResumeCard = ({
     logoUrl,
     altText,
@@ -32,12 +52,13 @@ export const ResumeCard = ({
     badges,
     period,
     description,
+    bullets,
     tech
 }: ResumeCardProps) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        if (description) {
+        if (description || bullets) {
             e.preventDefault();
             setIsExpanded(!isExpanded);
         }
@@ -49,7 +70,7 @@ export const ResumeCard = ({
             className="block cursor-pointer"
             onClick={handleClick}
         >
-            <Card className="flex">
+            <Card className="flex hover:border-indigo-500/30 hover:shadow-md hover:shadow-indigo-500/5 transition-all duration-300">
                 <div className="flex-none">
                     <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
                         <AvatarImage
@@ -83,29 +104,40 @@ export const ResumeCard = ({
                                         "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
                                         isExpanded ? "rotate-90" : "rotate-0"
                                     )}
-                                />
-                            </h3>
+                                />                            </h3>
                             <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
                                 {period}
                             </div>
                         </div>
                         {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
                     </CardHeader>
-                    {description && (
+                    {(bullets || description) && (
                         <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{
                                 opacity: isExpanded ? 1 : 0,
-
                                 height: isExpanded ? "auto" : 0,
                             }}
                             transition={{
                                 duration: 0.7,
                                 ease: [0.16, 1, 0.3, 1],
                             }}
-                            className="mt-2 mb-2 text-xs sm:text-sm whitespace-pre-wrap"
+                            className="mt-2 mb-2 overflow-hidden"
                         >
-                            {description}
+                            {bullets && bullets.length > 0 ? (
+                                <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground">
+                                    {bullets.map((bullet, i) => (
+                                        <li key={i} className="flex gap-2">
+                                            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-indigo-500/70" />
+                                            <span><InlineBold text={bullet} /></span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-xs sm:text-sm text-muted-foreground whitespace-pre-wrap">
+                                    {description}
+                                </p>
+                            )}
                         </motion.div>
                     )}
                     {tech && (

@@ -1,103 +1,72 @@
-"use client";
-
-import { cn } from "@/lib/utils";
-import Marquee from "./magicui/marquee";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
+import { ArrowUpRight } from "lucide-react";
 
-const ReviewCard = ({
-    img,
-    title,
-    url,
-    tags,
-    publishDate,
-    userName,
-    description
-}: {
-    img: string;
+interface BlogItem {
     title: string;
     url: string;
     tags: string[];
     publishDate: string;
-    userName: string;
-    description: string
-}) => {
-    return (
-        <Link href={url} key={url} target="_blank">
-        <figure
-            className={cn(
-                "relative w-64 h-[250px] cursor-pointer overflow-hidden rounded-xl border p-4",
-                // light styles
-                "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-                // dark styles
-                "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
-            )}
-        >
-            <div className="flex flex-row items-center gap-2">
-                <img className="rounded-full" width="32" height="32" alt="" src={img} />
-                <div className="flex flex-col">
-                    <figcaption className="text-sm font-medium dark:text-white">
-                        {title}
-                    </figcaption>
-                    <p className="text-xs font-medium dark:text-white/40">{userName}</p>
-                    <time className="font-sans text-xs">{publishDate}</time>
-                </div>
-            </div>
-            <blockquote className="mt-2 text-sm">{description}</blockquote>
-            <div className="flex relative items-center gap-2">
-            {tags && tags.length > 0 && (
-                <div className="flex flex-row flex-wrap items-start gap-1 inset-x-0 bottom-0">
-                    {tags?.map((tag) => (
-                        <Badge
-                            className="px-1 py-0 text-[10px]"
-                            variant="secondary"
-                            key={tag}
-                        >
-                            {tag}
-                        </Badge>
-                    ))}
-                </div>
-            )}
-            </div>
-        </figure>
-        </Link>
-    );
-};
+    description: string;
+}
 
-export function BlogsMarquee() {
+async function fetchBlogData(): Promise<BlogItem[]> {
+    try {
+        const response = await fetch("https://dev.to/api/articles?username=adi73", {
+            next: { revalidate: 3600 },
+        });
+        if (!response.ok) return [];
+        const data = await response.json();
+        return data.map((item: any) => ({
+            title: item.title,
+            url: item.url,
+            tags: item.tag_list,
+            publishDate: item.readable_publish_date,
+            description: item.description,
+        }));
+    } catch {
+        return [];
+    }
+}
 
-    const [blogData, setBlogData] = useState<any[]>([]);
+export async function BlogsMarquee() {
+    const posts = await fetchBlogData();
 
-    useEffect(() => {
-        async function fetchArticles() {
-            const blogsList: any[] = []
-            const response = await fetch("https://dev.to/api/articles?username=adi73").then(resp => resp.json());
-            response.map((item: any) => {
-                blogsList.push({
-                    img: "https://avatar.vercel.sh/AK",
-                    title: item.title,
-                    url: item.url,
-                    tags: item.tag_list,
-                    publishDate: item.readable_publish_date,
-                    userName: '@' + item.user.username,
-                    description: item.description
-                })
-            })
-            setBlogData(blogsList)
-        }
-        fetchArticles();
-    }, [])
+    if (posts.length === 0) return null;
 
     return (
-        <div className="relative flex h-[400px] w-full flex-col items-center justify-center overflow-hidden">
-            <Marquee pauseOnHover className="[--duration:30s]">
-                {blogData.map((review) => (
-                    <ReviewCard key={review.url} {...review} />
-                ))}
-            </Marquee>
-            <div className="pointer-events-none absolute inset-y-0 left-0 bg-gradient-to-r from-white dark:from-background"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 bg-gradient-to-l from-white dark:from-background"></div>
+        <div className="rounded-xl border border-border overflow-hidden divide-y divide-border">
+            {posts.map((post) => (
+                <Link
+                    key={post.url}
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start sm:items-center gap-3 px-4 py-3 hover:bg-muted/20 transition-colors"
+                >
+                    <div className="flex-1 min-w-0 space-y-0.5">
+                        <p className="text-sm font-medium leading-snug truncate group-hover:text-indigo-400 transition-colors">
+                            {post.title}
+                        </p>
+                        <p className="text-xs text-muted-foreground line-clamp-1 hidden sm:block">
+                            {post.description}
+                        </p>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                        <div className="hidden sm:flex flex-wrap gap-1">
+                            {post.tags.slice(0, 2).map((tag) => (
+                                <Badge key={tag} variant="secondary" className="text-[10px] px-1.5 py-0 font-mono">
+                                    #{tag}
+                                </Badge>
+                            ))}
+                        </div>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums">
+                            {post.publishDate}
+                        </span>
+                        <ArrowUpRight className="size-3.5 text-muted-foreground/50 group-hover:text-indigo-400 transition-colors" />
+                    </div>
+                </Link>
+            ))}
         </div>
-    )
+    );
 }
