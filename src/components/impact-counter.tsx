@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const STATS = [
-    { label: "Years Experience", value: 6, suffix: "+" },
+    { label: "Years Experience", value: 8, suffix: "+" },
     { label: "Companies", value: 5, suffix: "" },
-    { label: "Perf Gains", value: 50, suffix: "%" },
-    { label: "OSS Projects", value: 3, suffix: "" },
+    { label: "OSS Projects", value: 5, suffix: "+" },
 ];
 
 function useCountUp(target: number, duration: number, active: boolean) {
@@ -60,7 +59,7 @@ function StatItem({ label, value, suffix }: (typeof STATS)[number]) {
 
 export function ImpactCounterStrip() {
     return (
-        <div className="grid grid-cols-4 gap-4 rounded-xl border border-border bg-card/50 backdrop-blur-sm px-6 py-5">
+        <div className="flex justify-center gap-8 sm:gap-16 rounded-xl border border-border bg-card/50 backdrop-blur-sm px-6 py-5">
             {STATS.map((s) => (
                 <StatItem key={s.label} {...s} />
             ))}
