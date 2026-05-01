@@ -3,7 +3,6 @@ import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
